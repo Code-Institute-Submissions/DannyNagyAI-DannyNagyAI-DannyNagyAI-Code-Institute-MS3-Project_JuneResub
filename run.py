@@ -1,5 +1,3 @@
-run.py
-
 import os
 from flask import Flask, render_template
 
@@ -20,6 +18,16 @@ def about():
 @app.route("/recipes")
 def recipes():
     return render_template("recipes.html")
+
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
     
 
 if __name__ == "__main__":
