@@ -15,9 +15,9 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/recipes")
-def recipes():
-    return render_template("recipes.html")
+@app.route("/sandwiches")
+def sandwiches():
+    return render_template("sandwiches.html")
 
 
 @app.route("/login")
@@ -29,6 +29,10 @@ def login():
 def signup():
     return render_template("signup.html")
     
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
+
 
 if __name__ == "__main__":
     app.run(
