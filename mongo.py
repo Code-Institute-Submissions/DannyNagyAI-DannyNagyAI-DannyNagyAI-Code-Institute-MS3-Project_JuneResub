@@ -22,6 +22,10 @@ conn = mongo_connect(MONGO_URI)
 
 coll = conn[DATABASE][COLLECTION]
 
+new_doc = {"name": "BBQ Sandwich", "ingridients": "Bread, butter, bbq sauce from Kentucky, cheese", "instructions": "Just make it juicy and delicious"}
+
+coll.insert(new_doc)
+
 documents = coll.find()
 
 for doc in documents:
