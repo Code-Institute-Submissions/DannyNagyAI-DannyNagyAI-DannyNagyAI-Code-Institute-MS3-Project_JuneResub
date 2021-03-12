@@ -1,4 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Sandwiches</h1>
+<h1>Sandwiches</h1>
+<hr>
+<nav class="navbar navbar-light bg-light ">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search by inredient" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+<hr>
+
+{% if categories[0] %}
+{% for c in categories %}
+{{ c["category_name"] }} |
+{% endfor %}
+{% endif %}
+
+{% if sandwiches[0] %}
+<div class="card-group">
+
+    {% for s in sandwiches %}
+    <div class="card">
+        <img src="static/img/sandwiches/{{ s["image"] }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ s["sandwich_name"] }}</h5>
+            <p class="card-text">{{ s["description"] }}.</p>
+            <p class="card-text"><small class="text-muted">Category: {{ s["category"] }}</small></p>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <h4>Still hungry - no Sandwiches!!!</h4>
+    {% endif %}
+
+</div>
 {% endblock %}

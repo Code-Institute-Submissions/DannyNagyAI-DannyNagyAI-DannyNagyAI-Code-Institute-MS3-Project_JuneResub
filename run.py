@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from pymongo import MongoClient
 if os.path.exists("env.py"):
     import env
@@ -45,9 +45,21 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route("/createsandwich")
-def createsandwich():
-    return render_template("createsandwich.html")
+@app.route("/sandwich_form")
+def sandwich_form():
+    return render_template("sandwich_form.html")
+
+@app.route("/add_sandwich", methods=['POST'])
+def add_sandwich(): 
+    #Adding a sandwich  
+    sandwich_name = request.form["sandwich_name"]
+    description = request.form["description"]
+    category = request.form["category"]
+    ingredients = request.form["ingredients"]
+    instructions = request.form["instructions"]
+    image = request.form["image"]
+    sandwich_collection.insert({ "sandwich_name":sandwich_name, "description":description, "category":category, "ingredients":ingredients, "instructions":instructions, "image":image})    
+    return render_template("sandwich_form.html")
 
 
 if __name__ == "__main__":
