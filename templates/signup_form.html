@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Header -->
+<h1>Sign Up</h1>
+
+{% if message %}
+    {{ message }}
+{% endif %}
+
+<hr>
+<!-- Form Sign Up - from getbootstrap.com -->
+<form class="card mt3" method="POST" action="/signup">
+    <div class="form-group">
+        <label for="user_name">Username</label>
+        <input type="text" class="form-control" name="user_name" placeholder="Enter a username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter a password">
+    </div>
+    <div class="form-group">
+        <label for="display_name">Display Name</label>
+        <input type="text" class="form-control" name="display_name" placeholder="Enter a display name">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

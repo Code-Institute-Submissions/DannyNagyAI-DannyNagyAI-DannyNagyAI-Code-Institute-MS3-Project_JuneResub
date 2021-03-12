@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Header -->
+<h1>Login</h1>
+
+{% if message %}
+    {{ message }}
+{% endif %}
+
+<hr>
+<!-- Form Sign Up - from getbootstrap.com -->
+<form class="card mt3" method="POST" action="/login">
+    <div class="form-group">
+        <label for="user_name">Username</label>
+        <input type="text" class="form-control" name="user_name" placeholder="Enter a username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter a password">
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}

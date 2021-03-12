@@ -1,4 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Profile</h1>
+    <p>Kom igen nu!!!!</p>
+
+    {% if 'display_name' in session: %}
+    Welcome {{ session['display_name'] }}!
+{% endif %}
+
 {% endblock %}
