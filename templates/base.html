@@ -27,25 +27,31 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('sandwiches') }}">Sandwiches</a>
           </li>
+          {% if 'user_name' not in session: %}
            <li class="nav-item">
             <a class="nav-link" href="{{ url_for('login_form') }}">Login</a>
           </li>
            <li class="nav-item">
             <a class="nav-link" href="{{ url_for('signup_form') }}">Sign Up</a>
           </li>
-              <li class="nav-item">
+          {% else: %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
           </li>
               <li class="nav-item">
             <a class="nav-link" href="{{ url_for('sandwich_form') }}">Add Sandwich</a>
           </li>
+          {% endif %}
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Page Header -->
-<header class="masthead" style="background-image: url('https://wallpapercave.com/wp/wp2053415.jpg')">
+<!-- Page Header -->
+<header class="masthead">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
