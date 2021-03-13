@@ -1,4 +1,6 @@
 import os
+import bson
+from gridfs import GridFS
 from flask import Flask, render_template, request, session
 from pymongo import MongoClient
 if os.path.exists("env.py"):
@@ -9,7 +11,9 @@ app.secret_key = 'TjockSteffe'
 
 MONGO_URI = os.environ.get("MONGO_URI")
 client = MongoClient(MONGO_URI)         #host uri    
-db = client.iSandwichDB                 # Select the database    
+db = client.iSandwichDB                 # Select the database
+gfs = GridFS(db)                        # For Image upload ..
+images_collection = db.fs.files         # ?
 sandwich_collection = db.sandwiches     # Select the collection name  
 categories_collection = db.categories   # Select the categorys collection
 users_collection = db.users             # Select users
@@ -24,9 +28,55 @@ def about():
     return render_template("about.html")
 
 
+@app.route("/search_sandwiches", methods=['POST'])
+def search_sandwiches():
+    search_string = "%"+request.form["search"]+"%"
+    search_result = sandwich_collection.find({"ingredients":{ "$regex": search_string }})
+
+    return render_template("sandwiches.html", search_result = search_result)
+
+@app.route("/view_sandwich", methods=['GET'])
+def view_sandwich():
+    id = request.args.get('id')
+    sandwich = sandwich_collection.find_one({'_id':bson.ObjectId(oid=str(id))})
+    return render_template("sandwich.html", sandwich = sandwich)
+
+@app.route("/edit_sandwich", methods=['GET'])
+def edit_sandwich():
+    id = request.args.get('id')
+    sandwich = sandwich_collection.find_one({'_id':bson.ObjectId(oid=str(id))})
+    return render_template("sandwich_edit.html", sandwich = sandwich)
+
+@app.route("/update_sandwich", methods=['POST'])
+def update_sandwich():
+    # 1. Get the posted variables from the update form
+    id = request.form["id"]
+    sandwich_name = request.form["sandwich_name"]
+    description = request.form["description"]
+    category = request.form["category"]
+    prep_time = request.form["prep_time"]
+    ingredients = request.form["ingredients"]
+    instructions = request.form["instructions"]
+    image = request.form["image"]
+    user_name = session["user_name"]
+
+    # 2. Call the update method with variables above ..
+    sandwich_collection.update({'_id':bson.ObjectId(oid=str(id))}, {'$set':{ "sandwich_name":sandwich_name, "description":description, "category":category, "prep_time":prep_time, "ingredients":ingredients, "instructions":instructions, "image":image, "user_name":user_name}})
+    
+    message = "Youre sandwich is now up 2 date"
+
+    user_sandwiches = sandwich_collection.find({"user_name":session["user_name"]})
+
+    return render_template("profile.html", user_sandwiches = user_sandwiches)
+
 @app.route("/sandwiches")
 def sandwiches():
-    sandwiches_1 = sandwich_collection.find()
+    category = request.args.get('category')
+    if(category == "All" or category is None):
+        sandwiches_1 = sandwich_collection.find()
+    else:
+        sandwiches_1 = sandwich_collection.find({"category":category})
+
     catogories_1 = categories_collection.find()
     return render_template("sandwiches.html", sandwiches=sandwiches_1, categories=catogories_1)
 
@@ -109,20 +159,16 @@ def profile():
     # Then we send the loged in user to his profile page with his sandwiches to go :-) 
     return render_template("profile.html", user_sandwiches=user_sandwiches)
 
-@app.route("/edit_sandwich")    
-def edit_sandwich():    
-    #Deleting a Task with various references    
-    #key=request.values.get("_id")    
-    #sandwich_collection.remove({"_id":ObjectId(key)})    
-    return render_template("profile.html")
 
+@app.route("/delete_sandwich", methods=['GET'])
+def delete_sandwich():
+    id = request.args.get('id')
+    sandwich_collection.remove({"_id":bson.ObjectId(oid=str(id))})
+    message = "Deleted a sandwich"
 
-@app.route("/delete_sandwich")    
-def delete_sandwich():    
-    #Deleting a Task with various references    
-    #key=request.values.get("_id")    
-    #sandwich_collection.remove({"_id":ObjectId(key)})    
-    return render_template("profile.html")
+    user_sandwiches = sandwich_collection.find({"user_name": session["user_name"]})
+    
+    return render_template("profile.html", message = message, user_sandwiches = user_sandwiches)
 
 
 # ------------------------------------------------------------------------------------------------------------
@@ -135,15 +181,24 @@ def sandwich_form():
 
 @app.route("/add_sandwich", methods=['POST'])
 def add_sandwich(): 
-    # 1. Get the form data for the new sandwich  
+    # 1. Upload image to our folder of sandwich images
+    file = request.files['image']
+    file_name = file.filename
+    data = file.read()
+    file.save('static/img/sandwiches/' + file_name)
+    content_type = file.content_type
+    insertimg = gfs.put(data, content_type=content_type, filename=file_name)
+    
+    # 2. Get the form data for the new sandwich  
     sandwich_name = request.form["sandwich_name"]
     description = request.form["description"]
     category = request.form["category"]
+    prep_time = request.form["prep_time"]
     ingredients = request.form["ingredients"]
     instructions = request.form["instructions"]
-    image = request.form["image"]
+    image = file.filename
 
-    # 2. Save the new sandwich to database
+    # 3. Save the new sandwich to database
     sandwich_collection.insert({ "sandwich_name":sandwich_name, "description":description, "category":category, "ingredients":ingredients, "instructions":instructions, "image":image, "user_name":session['user_name']})    
  
     # 3. Send the user back to profile page with a success-message and a list of the users sandwiches

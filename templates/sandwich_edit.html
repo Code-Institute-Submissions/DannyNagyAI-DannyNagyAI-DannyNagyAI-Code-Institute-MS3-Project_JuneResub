@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if sandwich %}
+
 <!-- Header -->
-<h1>Add Sandwich</h1>
+<h1>Edit Sandwich</h1>
 
 <!-- Form to post/add a Sandwich to MongoDB -->
-<form class="card mt3 shadow" method="POST" action="/add_sandwich" enctype="multipart/form-data">
+<form class="card mt3 shadow" method="POST" action="/update_sandwich"">
+    <input type="hidden" name="id" value="{{ sandwich._id }}">
     <fieldset>
         <div class="form-group">
             <label for="sandwich_name">Sandwich Name</label>
-            <input type="text" name="sandwich_name" class="form-control" placeholder="" required>
+            <input type="text" name="sandwich_name" value="{{ sandwich.sandwich_name }}" class="form-control" placeholder="" required>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" name="description" class="form-control" placeholder="" required>
+            <input type="text" name="description" value="{{ sandwich.description }}" class="form-control" placeholder="" required>
         </div>
         <div class="form-group">
             <label for="category">Category</label>
@@ -27,23 +30,27 @@
         </div>
         <div class="form-group">
             <label for="prep_time">Preparation time</label>
-            <input type="text" name="prep_time" value="" class="form-control" placeholder="Estimated time" required>
+            <input type="text" name="prep_time" value="{{ sandwich.prep_time }}" class="form-control" placeholder="" required>
         </div>
         <div class="form-group">
             <label for="ingredients">Ingredients</label>
             <textarea name="ingredients" rows="2" class="form-control" placeholder="One ingredient per time"
-                required></textarea>
+                required>{{ sandwich.ingredients }}</textarea>
         </div>
         <div class="form-group">
             <label for="instructions">Instructions</label>
-            <textarea name="instructions" rows="2" class="form-control" placeholder="One instruction per time"></textarea>
+            <textarea name="instructions" rows="2" class="form-control" placeholder="One instruction per time">{{ sandwich.instructions }}</textarea>
         </div>
+
         <div class="form-group">
             <label for="image">Image</label>
-            <input type="file" name="image" class="form-control" placeholder="Enter name of image, ie. tomato_sandwich.jpg" required>
+            <input type="text" name="image" value="{{ sandwich.image }}" class="form-control" placeholder="Enter name of image, ie. tomato_sandwich.jpg" required>
         </div>
-        <button type="submit" class="btn btn-primary">Add your sandwich!</button>
+        <button type="submit" class="btn btn-primary">Update your sandwich!</button>
     </fieldset>
 </form>
+
+{% endif %}
+
 
 {% endblock %}

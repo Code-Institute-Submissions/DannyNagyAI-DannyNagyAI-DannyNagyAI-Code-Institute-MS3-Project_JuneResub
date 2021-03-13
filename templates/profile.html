@@ -22,8 +22,9 @@
             <p class="card-text"><small class="text-muted">Category: {{ us["category"] }}</small></p>
         </div>
         <div class="text-center">
-             <a href="{{ url_for('edit_sandwich') }}" class="btn btn-primary">Edit</a>
-             <a href="{{ url_for('delete_sandwich') }}" class="btn btn-danger ">Delete</a>
+             <a href="{{ url_for('edit_sandwich') }}?id={{ us["_id"] }}" class="btn btn-primary">Edit</a>
+
+             <a href="{{ url_for('delete_sandwich') }}?id={{ us["_id"] }}" class="btn btn-danger">Delete</a>
         </div>
     </div>
     {% endfor %}

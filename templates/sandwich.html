@@ -1,4 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>XXXX</h1>
+
+    {% if sandwich %}
+    <div class="card">
+        <img src="/static/img/sandwiches/{{ sandwich.image }}">
+        <h2>{{ sandwich.sandwich_name }}</h2>
+        <p>{{ sandwich.description }}</p>
+        <p>Category: {{ sandwich.category }}</p>
+        <p>{{ sandwich.prep_time }}</p>
+        <p>{{ sandwich.ingredients }}</p>
+        <p>{{ sandwich.sandwich_name }}</p>
+    </div>
+    {% endif %}
+
 {% endblock %}

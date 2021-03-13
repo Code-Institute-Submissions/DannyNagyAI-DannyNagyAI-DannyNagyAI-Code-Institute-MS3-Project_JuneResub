@@ -3,39 +3,53 @@
 <h1>Sandwiches</h1>
 <hr>
 <nav class="navbar navbar-light bg-light text-center">
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search by inredient" aria-label="Search">
+    <form class="form-inline" method="POST" action="/search_sandwiches">
+        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search by ingredient" aria-label="Search">
         <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
     </form>
 </nav>
 <hr>
+{% if search_result %}
+<p>Got some results for ya!</p>
+    {% for fs in search_result %}
 
-{% if categories[0] %}
-{% for c in categories %}
-{{ c["category_name"] }} |
-{% endfor %}
-{% endif %}
+        <p>{{ fs["sandwich_name"] }}</p>
+        <p>{{ fs["description"] }}</p>
 
-{% if sandwiches[0] %}
-<div class="card-group">
-
-    {% for s in sandwiches %}
-    <div class="card text-center">
-        <img src="static/img/sandwiches/{{ s["image"] }}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{ s["sandwich_name"] }}</h5>
-            <p class="card-text">{{ s["description"] }}.</p>
-            <p class="card-text"><small class="text-muted">Category: {{ s["category"] }}</small></p>
-        </div>
-        <div class="text-center">
-           <button type="button" class="btn btn-info">View</button>
-        </div>
-    </div>
     {% endfor %}
 
-    {% else %}
-    <h4>Still hungry - no Sandwiches!!!</h4>
+{% else %}
+<p>Sorry - no result</p>
+
+    {% if categories[0] %}
+    <a href="?category=All">All</a> | 
+    {% for c in categories %}
+    <a href="?category={{ c["category_name"] }}">{{ c["category_name"] }}</a> |
+    {% endfor %}
     {% endif %}
 
-</div>
+    {% if sandwiches[0] %}
+    <div class="card-group">
+
+        {% for s in sandwiches %}
+        <div class="card text-center">
+            <img src="static/img/sandwiches/{{ s["image"] }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ s["sandwich_name"] }}</h5>
+                <p class="card-text">{{ s["description"] }}.</p>
+                <p class="card-text"><small class="text-muted">Category: {{ s["category"] }}</small></p>
+            </div>
+            <div class="text-center">
+            <a href="{{ url_for('view_sandwich') }}?id={{ s["_id"] }}" class="btn btn-info">View Sandwich</a>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% else %}
+        <h4>Still hungry - no Sandwiches!!!</h4>
+        {% endif %}
+    </div>
+
+{% endif %}
+
 {% endblock %}
