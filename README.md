@@ -8,7 +8,9 @@ This app allows users to get the most out of their passion with both sandwiches 
 This application is dedicated to all Sandwich lovers out there in the big world, that has been trying for years to find and share  their sandwich recipes with others online. 
 
 iSandwich help users come together as a community to share their interest and passion for sandwiches. 
+
 To be able to build the iSandwich app, I had to include:
+
 A simple way of navigating around the page.
 Login and sign up page for the users.
 Showcase photos, information, ingredients and instructions of sandwich and different recipes.
@@ -19,7 +21,7 @@ I tried to stay on the same path during the entire project with colors, design a
 Mockup for the Project
 
 Link to the iSandwich Mockup made in Figma:
-https://www.figma.com/file/qy4sdGyd1rSLJnwgxMJqpd/Doggy-Resuce?node-id=0%3A1
+
 
 
 ##Features
@@ -94,19 +96,21 @@ My webiste is currently up on Heroku -
 
 ##Credits
 
-Content
+###Content
 All of the content on the website is an example/fictive.
 
-Mentors
+###Mentors
 Got a lot of help from my mentor Oluwafemi Medale and again also some great coaching from my local mentor in Sweden, a Software developer named Daniel Sweder. He truly is an IT-genius! 
 
-Media
+###Media
 All of the photos used on this site were obtained from Shutterstock here and google. 
 
-Acknowledgements and References
+###Acknowledgements and References
 Code Institute - I used what I learned so far from Code Instiute (Flask/Python/Heroku/Bootstrap/CSS/HTML).
 Bootstrap - I used this template to be able to shape the start of my project.
 Bootstrap - I used this template to shape the card-part on dogs page.
 Bootstrap - I used this template to be able to show users the location.
 Bootstrap - I used this template to shape my own form on the adoption page.
 Bootstrap - I used this footer to able to shape the footer on all pages.
+
+###by Daniel 
