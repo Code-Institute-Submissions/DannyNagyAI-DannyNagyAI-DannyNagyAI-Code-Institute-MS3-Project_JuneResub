@@ -24,17 +24,17 @@ https://www.figma.com/file/VYEOxrCaigUv6gqqvZYQSa/iSandwich?node-id=0%3A1
 
 Home Page Navbar with easy and readable links. Hero Image - A big sandwich with some welcoming and fun text, that get the sandwich loving users to feel excited. Short description about the page and how to join the community. Links to sign up page.
 
-### About Page Hero Image - of a big and delicious sandwich with sub-text below. Information about the iSandwich history and the great idea behind it.
+#### About Page Hero Image - of a big and delicious sandwich with sub-text below. Information about the iSandwich history and the great idea behind it.
 
-### Sandwiches Page A big hero image of a sandwich. A nice view of all the sandwiches located in the app’s database. A search bar to search for specific ingredients. A category filter, to filter out different types of sandwiches that exist in the database.
+#### Sandwiches Page A big hero image of a sandwich. A nice view of all the sandwiches located in the app’s database. A search bar to search for specific ingredients. A category filter, to filter out different types of sandwiches that exist in the database.
 
-### Login Page Input for both username, password and with a submit button below to login to the page.
+#### Login Page Input for both username, password and with a submit button below to login to the page.
 
-### Sign up Page Input for username, password and an unique display name for the user (so that the user does not have to show his username during his/her session time, safety first!) to be able to get an account and login to the page.
+#### Sign up Page Input for username, password and an unique display name for the user (so that the user does not have to show his username during his/her session time, safety first!) to be able to get an account and login to the page.
 
-### Profile Page Always the starting point for the logged in user and here the users can se their own display_names while logged in. The user can also both edit and delete their Sandwiches on this page.
+#### Profile Page Always the starting point for the logged in user and here the users can se their own display_names while logged in. The user can also both edit and delete their Sandwiches on this page.
 
-### Add Sandwich Here the user can add and build their own recipe of a sandwich that they would like to share with others.
+#### Add Sandwich Here the user can add and build their own recipe of a sandwich that they would like to share with others.
 
 ## Technologies used in the project 
 
@@ -64,9 +64,11 @@ An allergens button to the Sandwich page, to be able to filter allergens faster.
 
 An file upload function instead in the "add sandiwch" page. The solution for this is about 90% done. Will be un-commentend in the next version. 
 
-## Validation HTML All files passed validation at https://validator.w3.org/nu/#textarea
+## Validation HTML 
+All files passed validation at https://validator.w3.org/nu/#textarea
 
-## Deployment My website is currently up on Github Pages -  https://github.com/DannyNagyAI/DannyNagyAI-DannyNagyAI-Code-Institute-MS3-Project
+## Deployment 
+My website is currently up on Github Pages -  https://github.com/DannyNagyAI/DannyNagyAI-DannyNagyAI-Code-Institute-MS3-Project
 
 My webiste is currently up on Heroku -
 
