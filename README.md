@@ -1,9 +1,5 @@
 #iSandwich
 
-![alt text](https://github.com/DannyNagyAI/Code-Institute-MS3-Project/blob/master/static/img/coverphoto-bg1.jpg "Header of the Homepage")
-
-> **(iSandwich)**
-
 iSandwich is a Flask and MongoDB web application that helps users to find and share their Sandwich recipes online! 
 This app allows users to get the most out of their passion with both sandwiches and sandwich recipes. With this app they can find new recipes, search ingredients, add new recipes, edit old recipes and delete their own recipes. 
 
