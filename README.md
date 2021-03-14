@@ -24,29 +24,35 @@ https://www.figma.com/file/VYEOxrCaigUv6gqqvZYQSa/iSandwich?node-id=0%3A1
 
 Home Page Navbar with easy and readable links. Hero Image - A big sandwich with some welcoming and fun text, that get the sandwich loving users to feel excited. Short description about the page and how to join the community. Links to sign up page.
 
-#### About Page Hero Image - of a big and delicious sandwich with sub-text below. Information about the iSandwich history and the great idea behind it.
+#### About Page 
+Hero Image - of a big and delicious sandwich with sub-text below. Information about the iSandwich history and the great idea behind it.
 
-#### Sandwiches Page A big hero image of a sandwich. A nice view of all the sandwiches located in the app’s database. A search bar to search for specific ingredients. A category filter, to filter out different types of sandwiches that exist in the database.
+#### Sandwiches Page 
+A big hero image of a sandwich. A nice view of all the sandwiches located in the app’s database. A search bar to search for specific ingredients. A category filter, to filter out different types of sandwiches that exist in the database.
 
-#### Login Page Input for both username, password and with a submit button below to login to the page.
+#### Login Page 
+Input for both username, password and with a submit button below to login to the page.
 
-#### Sign up Page Input for username, password and an unique display name for the user (so that the user does not have to show his username during his/her session time, safety first!) to be able to get an account and login to the page.
+#### Sign up Page 
+Input for username, password and an unique display name for the user (so that the user does not have to show his username during his/her session time, safety first!) to be able to get an account and login to the page.
 
-#### Profile Page Always the starting point for the logged in user and here the users can se their own display_names while logged in. The user can also both edit and delete their Sandwiches on this page.
+#### Profile Page 
+Always the starting point for the logged in user and here the users can se their own display_names while logged in. The user can also both edit and delete their Sandwiches on this page.
 
-#### Add Sandwich Here the user can add and build their own recipe of a sandwich that they would like to share with others.
+#### Add Sandwich 
+Here the user can add and build their own recipe of a sandwich that they would like to share with others.
 
 ## Technologies used in the project 
 
-HTML5 
-CSS 
-Bootstrap 
-JQuery 
-JavaScript 
-Python 
-Pymongo 
-Flask 
-MongoDB 
+HTML5, 
+CSS, 
+Bootstrap, 
+JQuery, 
+JavaScript, 
+Python, 
+Pymongo, 
+Flask, 
+MongoDB, 
 Heroku
 
 ## Testing 
