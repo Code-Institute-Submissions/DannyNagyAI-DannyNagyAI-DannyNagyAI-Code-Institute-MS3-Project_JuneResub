@@ -8,37 +8,54 @@
     </form>
 </nav>
 <hr>
+
 {% if search_result %}
-<p>Got some results for ya!</p>
+<div>Search hits: {{ search_result.count() }}</div>
+<div class="row">
     {% for fs in search_result %}
-
-        <p>{{ fs["sandwich_name"] }}</p>
-        <p>{{ fs["description"] }}</p>
-
+        <div class="col-sm-4">
+            <div class="card text-center">
+                <img src="static/img/sandwiches/{{ fs["image"] }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ fs["sandwich_name"] }}</h5>
+                    <p class="card-text">{{ fs["description"] }}.</p>
+                    <p class="card-text"><small class="text-muted">Category: {{ fs["category"] }}</small></p>
+                </div>
+                <div class="text-center">
+                    <a href="{{ url_for('view_sandwich') }}?id={{ fs["_id"] }}" class="btn btn-success">View Sandwich</a>
+                </div>
+            </div>
+        </div>
     {% endfor %}
-
+</div>
 {% else %}
 
     {% if categories[0] %}
-    <a href="?category=All">All</a> | 
-    {% for c in categories %}
-    <a href="?category={{ c["category_name"] }}">{{ c["category_name"] }}</a> |
-    {% endfor %}
+    <div id="categories_filter">
+        <ul>
+        <li><a href="?category=All">All</a></li> 
+        {% for c in categories %}
+            <li><a href="?category={{ c["category_name"] }}">{{ c["category_name"] }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 
     {% if sandwiches[0] %}
-    <div class="card-group">
-
+    
+    <div class="row">
         {% for s in sandwiches %}
-        <div class="card text-center">
-            <img src="static/img/sandwiches/{{ s["image"] }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ s["sandwich_name"] }}</h5>
-                <p class="card-text">{{ s["description"] }}.</p>
-                <p class="card-text"><small class="text-muted">Category: {{ s["category"] }}</small></p>
-            </div>
-            <div class="text-center">
-            <a href="{{ url_for('view_sandwich') }}?id={{ s["_id"] }}" class="btn btn-success">View Sandwich</a>
+        <div class="col-sm-4">
+            <div class="card text-center">
+                <img src="static/img/sandwiches/{{ s["image"] }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ s["sandwich_name"] }}</h5>
+                    <p class="card-text">{{ s["description"] }}.</p>
+                    <p class="card-text"><small class="text-muted">Category: {{ s["category"] }}</small></p>
+                </div>
+                <div class="text-center">
+                    <a href="{{ url_for('view_sandwich') }}?id={{ s["_id"] }}" class="btn btn-success">View Sandwich</a>
+                </div>
             </div>
         </div>
         {% endfor %}

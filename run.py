@@ -1,4 +1,5 @@
 import os
+import re
 import bson
 # from gridfs import GridFS - use in next version
 from flask import Flask, render_template, request, session
@@ -22,14 +23,20 @@ users_collection = db.users             # Select users
 def index():
     return render_template("index.html", title="Home of the brave", subtitle="Heal your cravings", heroimage="coverphoto-bg1.jpg")
 
+@app.route("/test")
+def test():
+    return render_template("test.html", title="Test layout", subtitle="Please give us peace", heroimage="coverphoto-bg6.jpg")
+
 @app.route("/about")
 def about():
     return render_template("about.html", title="About us", subtitle="The untold story", heroimage="coverphoto-bg6.jpg")
 
 @app.route("/search_sandwiches", methods=['POST'])
 def search_sandwiches():
-    search_string = "%"+request.form["search"]+"%"
-    search_result = sandwich_collection.find({"ingredients":{ "$regex": search_string }})
+    search_string = request.form["search"]
+    search_string = search_string.split()
+    
+    search_result = sandwich_collection.find({'ingredients': {'$in': search_string}})
 
     return render_template("sandwiches.html", search_result = search_result, heroimage="coverphoto-bg7.jpg")
 

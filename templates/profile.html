@@ -3,26 +3,27 @@
 {% if message %} {{ message }} {% endif %}
 
 {% if user_sandwiches[0] %}
-<div class="card-group">
+<div class="row">
 
     {% for us in user_sandwiches %}
-    <div class="card text-center">
-        <img src="static/img/sandwiches/{{ us["image"] }}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{ us["sandwich_name"] }}</h5>
-            <p class="card-text">{{ us["description"] }}.</p>
-            <p class="card-text"><small class="text-muted">Category: {{ us["category"] }}</small></p>
-        </div>
-        <div class="text-center">
-             <a href="{{ url_for('edit_sandwich') }}?id={{ us["_id"] }}" class="btn btn-primary">Edit</a>
-
-             <a href="{{ url_for('delete_sandwich') }}?id={{ us["_id"] }}" class="btn btn-danger">Delete</a>
+    <div class="col-sm-4">
+        <div class="card text-center">
+            <img src="static/img/sandwiches/{{ us["image"] }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ us["sandwich_name"] }}</h5>
+                <p class="card-text">{{ us["description"] }}.</p>
+                <p class="card-text"><small class="text-muted">Category: {{ us["category"] }}</small></p>
+            </div>
+            <div class="text-center">
+                <a href="{{ url_for('edit_sandwich') }}?id={{ us["_id"] }}" class="btn btn-primary">Edit</a>
+                <a href="{{ url_for('delete_sandwich') }}?id={{ us["_id"] }}" class="btn btn-danger">Delete</a>
+            </div>
         </div>
     </div>
     {% endfor %}
-
-    {% else %}
+</div>
+{% else %}
     <h4>Still hungry - no Sandwiches!!!</h4>
-    {% endif %}
+{% endif %}
 
 {% endblock %}

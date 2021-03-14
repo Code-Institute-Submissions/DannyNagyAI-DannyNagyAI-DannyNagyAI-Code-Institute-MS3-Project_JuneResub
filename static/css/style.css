@@ -1,6 +1,6 @@
-/*------------------*/
-/* General          */
-/*------------------*/
+/* ================================================ */
+/* General stuff - mostly small adjustments         */
+/* ================================================ */
 p {
     margin-top: 30px !important;
 }
@@ -12,6 +12,40 @@ footer a {
 footer a:hover {
    color: #0085a1 !important;
 }
+
+div#categories_filter {
+    margin-bottom: 1em;
+    text-transform: uppercase;
+}
+
+div#categories_filter ul {
+  list-style: none; /* Remove HTML bullets */
+  padding: 0;
+  margin: 0;
+}
+
+div#categories_filter li { 
+  display: inline;
+}
+
+div#categories_filter li a:hover { 
+  text-decoration: none;
+}
+
+div#categories_filter li:not(:last-child):after {
+  content: " | ";
+  padding:0.25em;
+}
+
+div.card {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+
+div.card img {
+    max-width: 360px;
+}
+
 
 /*---------------*/
 /*------Home-----*/

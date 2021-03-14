@@ -3,39 +3,21 @@
 
     {% if sandwich %}
 
-    <!--
-    <div class="card">
-        <img src="/static/img/sandwiches/{{ sandwich.image }}">
-        <h2>{{ sandwich.sandwich_name }}</h2>
-        <ul>
-            <li>Description: {{ sandwich.description }}</li>
-            <li>Category: {{ sandwich.category }}</li>
-            <li>Preparation: {{ sandwich.prep_time }}</li>
-            <li>Ingredients: {{ sandwich.ingredients }}</li>
-        </ul>
-    </div>
-    -->
-
     <div class="card flex-row flex-wrap">
         <div class="card-header border-0">
-            <img src="/static/img/sandwiches/{{ sandwich.image }}" style="max-width: 500px;" alt="">
+            <img src="/static/img/sandwiches/{{ sandwich.image }}" alt="">
         </div>
         <div class="card-block px-2">
             <h4 class="card-title">{{ sandwich.sandwich_name }}</h4>
-            <p class="card-text">
-                <ul>
-                    <li>Description: {{ sandwich.description }}</li>
-                    <li>Category: {{ sandwich.category }}</li>
-                    <li>Preparation: {{ sandwich.prep_time }}</li>
-                    <li>Ingredients: {{ sandwich.ingredients }}</li>
-                </ul>
-
-            </p>
+            <ul>
+                <li>Description: {{ sandwich.description }}</li>
+                <li>Category: {{ sandwich.category }}</li>
+                <li>Preparation: {{ sandwich.prep_time }}</li>
+                <li>Ingredients: {{ sandwich.ingredients }}</li>
+            </ul>
         </div>
         <div class="w-100"></div>
-        <div class="card-footer w-100 text-muted">
-            FOOTER??
-        </div>
+        <div class="card-footer w-100 text-muted">&nbsp;</div>
     </div>
 
 
