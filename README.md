@@ -39,7 +39,7 @@ Input for username, password and an unique display name for the user (so that th
 #### Profile Page 
 Always the starting point for the logged in user and here the users can se their own display_names while logged in. The user can also both edit and delete their Sandwiches on this page.
 
-#### Add Sandwich 
+#### Add Sandwich Page
 Here the user can add and build their own recipe of a sandwich that they would like to share with others.
 
 ## Technologies used in the project 
