@@ -82,10 +82,20 @@ Firefox
 Safari
 
 ##Issues/problems/improvements
-No known bugs or bigger problems, however some things should be fixed for a 2.0 version:
-The "active" menu-item, when you scroll on page, the active button stops to indicate which page your on (you can still navigate, but active indicator doest not appear active).
-The form on the contact page is not perfect, might need some adjustments like width of form elements. Also future version might also contain functionality on serverside to actually sending a email message. Probably we will use Python (or Java) language to parse the posted form content.
-Hero images should be resized to less height, in order to view more of the page content at first glance.
+No known bugs or bigger problems, however some  things should be fixed for a 2.0 version:
+
+All of the pages could have much better design such as more beutiful pages, better details and an overall better experience for the users. 
+
+The view page for the Sandwiches could have much more beutiful design solutions and better structured content cards, that looks more proffesional.
+
+The search function could improve a lot... This is what happens when you run out of time before a deadline.
+
+Show the display name of which user that has made the recipe. 
+
+An allergens button to the Sandwich page, to be able to filter allergens faster. 
+
+An input in the add sandiwch to upload files could be added instead. 
+
 
 ##Validation HTML
 All files passed validation at https://validator.w3.org/nu/#textarea
@@ -103,14 +113,16 @@ All of the content on the website is an example/fictive.
 Got a lot of help from my mentor Oluwafemi Medale and again also some great coaching from my local mentor in Sweden, a Software developer named Daniel Sweder. He truly is an IT-genius! 
 
 ###Media
-All of the photos used on this site were obtained from Shutterstock here and google. 
+All of the photos used on this site were obtained from Shutterstock and Google. 
 
 ###Acknowledgements and References
-Code Institute - I used what I learned so far from Code Instiute (Flask/Python/Heroku/Bootstrap/CSS/HTML).
-Bootstrap - I used this template to be able to shape the start of my project.
-Bootstrap - I used this template to shape the card-part on dogs page.
-Bootstrap - I used this template to be able to show users the location.
-Bootstrap - I used this template to shape my own form on the adoption page.
+Code Institute - I moslty used what I learned combined so far from Code Instiute (Flask/Python/Heroku/Bootstrap/CSS/HTML).
+Flask - I used some ideas here to 
+Python - I used this template to shape the card-part on dogs page.
+Bootstrap - I used this template for the theme. 
+CSS - I used this template to shape my own form on the adoption page.
 Bootstrap - I used this footer to able to shape the footer on all pages.
+MongoDB - I used this footer to able to shape the footer on all pages.
+Daniel Sweder - I got a lot of advices from him live.  
 
 ###by Daniel 
