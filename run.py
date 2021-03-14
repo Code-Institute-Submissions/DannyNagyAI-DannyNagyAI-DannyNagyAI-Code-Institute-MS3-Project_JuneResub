@@ -20,13 +20,11 @@ users_collection = db.users             # Select users
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-
+    return render_template("index.html", title="Home of the brave", subtitle="Heal your cravings", heroimage="coverphoto-bg1.jpg")
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
-
+    return render_template("about.html", title="About us", subtitle="The untold story", heroimage="coverphoto-bg2.jpg")
 
 @app.route("/search_sandwiches", methods=['POST'])
 def search_sandwiches():
@@ -78,7 +76,7 @@ def sandwiches():
         sandwiches_1 = sandwich_collection.find({"category":category})
 
     catogories_1 = categories_collection.find()
-    return render_template("sandwiches.html", sandwiches=sandwiches_1, categories=catogories_1)
+    return render_template("sandwiches.html", sandwiches=sandwiches_1, categories=catogories_1, title="Sandwiches", subtitle="Take a look at our masterchef recipes")
 
 
 # ------------------------------------------------------------------------------------------------------------
@@ -87,7 +85,7 @@ def sandwiches():
 
 @app.route("/login_form", methods=['GET']) 
 def login_form():
-    return render_template("login_form.html")
+    return render_template("login_form.html", title="Log in", subtitle="Welcome to the pleasuredome!")
 
 @app.route("/login", methods=['POST']) 
 def login():
@@ -126,7 +124,7 @@ def logout():
 # ------------------------------------------------------------------------------------------------------------
 @app.route("/signup_form") 
 def signup_form():
-    return render_template("signup_form.html")
+    return render_template("signup_form.html", title="Sign up", subtitle="Sharing is caring - come on, join now!")
 
 
 @app.route("/signup", methods=['POST'])

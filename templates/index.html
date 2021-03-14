@@ -1,18 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Home</h1>
-<hr>
-<div class="card text-center">
-    <div class="card-header">
-        Featured
+
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h2>We believe in nothing but sandwich!</h2>
+
+            <p>Here at iSandwich you will find a various range of the the most popular sandwiches.</p>
+            
+            <p>Feel free to <a href="{{ url_for('signup_form') }}">join</a> our community and share your <a href="{{ url_for('sandwiches') }}">sandwich recipes!</a> </p>
+        </div>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">Here you'll find your ultimate Sandwich website were you can share and get inspired by others recipes.</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Get started</a>
-    </div>
-    <div class="card-footer text-muted">
-        2 days ago
-    </div>
-</div>
+
 {% endblock %}
