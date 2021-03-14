@@ -1,6 +1,6 @@
 import os
 import bson
-from gridfs import GridFS
+# from gridfs import GridFS - use in next version
 from flask import Flask, render_template, request, session
 from pymongo import MongoClient
 if os.path.exists("env.py"):
@@ -12,8 +12,8 @@ app.secret_key = 'TjockSteffe'
 MONGO_URI = os.environ.get("MONGO_URI")
 client = MongoClient(MONGO_URI)         #host uri    
 db = client.iSandwichDB                 # Select the database
-gfs = GridFS(db)                        # For Image upload ..
-images_collection = db.fs.files         # ?
+# gfs = GridFS(db)                      # For Image upload - see version 2.0
+# images_collection = db.fs.files         # ?
 sandwich_collection = db.sandwiches     # Select the collection name  
 categories_collection = db.categories   # Select the categorys collection
 users_collection = db.users             # Select users
@@ -24,26 +24,27 @@ def index():
 
 @app.route("/about")
 def about():
-    return render_template("about.html", title="About us", subtitle="The untold story", heroimage="coverphoto-bg2.jpg")
+    return render_template("about.html", title="About us", subtitle="The untold story", heroimage="coverphoto-bg6.jpg")
 
 @app.route("/search_sandwiches", methods=['POST'])
 def search_sandwiches():
     search_string = "%"+request.form["search"]+"%"
     search_result = sandwich_collection.find({"ingredients":{ "$regex": search_string }})
 
-    return render_template("sandwiches.html", search_result = search_result)
+    return render_template("sandwiches.html", search_result = search_result, heroimage="coverphoto-bg7.jpg")
 
 @app.route("/view_sandwich", methods=['GET'])
 def view_sandwich():
     id = request.args.get('id')
     sandwich = sandwich_collection.find_one({'_id':bson.ObjectId(oid=str(id))})
-    return render_template("sandwich.html", sandwich = sandwich)
+    return render_template("sandwich.html", sandwich = sandwich, title=sandwich.get("sandwich_name"), subtitle="Check it out dude!", heroimage="coverphoto-bg14.jpg")
 
 @app.route("/edit_sandwich", methods=['GET'])
 def edit_sandwich():
     id = request.args.get('id')
     sandwich = sandwich_collection.find_one({'_id':bson.ObjectId(oid=str(id))})
-    return render_template("sandwich_edit.html", sandwich = sandwich)
+    categories = categories_collection.find()
+    return render_template("sandwich_edit.html", sandwich = sandwich, categories=categories, title="Edit your sandwich", subtitle=session["user_name"], heroimage="coverphoto-bg14.jpg")
 
 @app.route("/update_sandwich", methods=['POST'])
 def update_sandwich():
@@ -65,7 +66,7 @@ def update_sandwich():
 
     user_sandwiches = sandwich_collection.find({"user_name":session["user_name"]})
 
-    return render_template("profile.html", user_sandwiches = user_sandwiches)
+    return render_template("profile.html", user_sandwiches = user_sandwiches, title="Profile", subtitle=session["user_name"], heroimage="coverphoto-bg3.jpg")
 
 @app.route("/sandwiches")
 def sandwiches():
@@ -76,7 +77,7 @@ def sandwiches():
         sandwiches_1 = sandwich_collection.find({"category":category})
 
     catogories_1 = categories_collection.find()
-    return render_template("sandwiches.html", sandwiches=sandwiches_1, categories=catogories_1, title="Sandwiches", subtitle="Take a look at our masterchef recipes")
+    return render_template("sandwiches.html", sandwiches=sandwiches_1, categories=catogories_1, title="Sandwiches", subtitle="Take a look at our masterchef recipes", heroimage="coverphoto-bg7.jpg")
 
 
 # ------------------------------------------------------------------------------------------------------------
@@ -85,7 +86,7 @@ def sandwiches():
 
 @app.route("/login_form", methods=['GET']) 
 def login_form():
-    return render_template("login_form.html", title="Log in", subtitle="Welcome to the pleasuredome!")
+    return render_template("login_form.html", title="Log in", subtitle="Welcome to the pleasuredome!", heroimage="coverphoto-bg3.jpg")
 
 @app.route("/login", methods=['POST']) 
 def login():
@@ -104,7 +105,7 @@ def login():
         user_sandwiches = sandwich_collection.find({"user_name":user.get("user_name")})
 
         # Then we send the loged in user to his profile page with his sandwiches to go :-) 
-        return render_template("profile.html", user_sandwiches=user_sandwiches)
+        return render_template("profile.html", user_sandwiches=user_sandwiches, title="Profile", subtitle=session['display_name'], heroimage="coverphoto-bg3.jpg")
     else:
         message = "Could not log in user, please try again!"
         return render_template("login_form.html", message=message)
@@ -116,7 +117,7 @@ def logout():
    session.pop('user_name', None)
    session.pop('display_name', None)
    message = "You have been logged out"
-   return render_template("login_form.html", message=message)
+   return render_template("login_form.html", message=message, title="Log out", subtitle="See you later.. miss u allready", heroimage="coverphoto-bg3.jpg")
 
 
 # ------------------------------------------------------------------------------------------------------------
@@ -124,7 +125,7 @@ def logout():
 # ------------------------------------------------------------------------------------------------------------
 @app.route("/signup_form") 
 def signup_form():
-    return render_template("signup_form.html", title="Sign up", subtitle="Sharing is caring - come on, join now!")
+    return render_template("signup_form.html", title="Sign up", subtitle="Sharing is caring - come on, join now!", heroimage="coverphoto-bg1.jpg")
 
 
 @app.route("/signup", methods=['POST'])
@@ -143,19 +144,18 @@ def signup():
         message = "The registration went well, user " + display_name + " is now a member"
         return render_template("signup_form.html", message=message)
 
-# ------------------------------------------------------------------------------------------------------------
-# Profile Page
-# ------------------------------------------------------------------------------------------------------------
+# ==============================================================================
+# Profile Page and stuff ... 
+# ie when adding, deleting, editing a sandwich we always return to profile   
+# ==============================================================================
 @app.route("/profile")
 def profile():
     # 1. Get the current loged in user 
     user_name = session["user_name"]     # Note: add som error handeling!
-
     # We also want to provide the profile page with the current loged in users sandwiches
     user_sandwiches = sandwich_collection.find({"user_name": user_name})
-
     # Then we send the loged in user to his profile page with his sandwiches to go :-) 
-    return render_template("profile.html", user_sandwiches=user_sandwiches)
+    return render_template("profile.html", user_sandwiches=user_sandwiches, title="Profile", subtitle=session["user_name"], heroimage="coverphoto-bg3.jpg")
 
 
 @app.route("/delete_sandwich", methods=['GET'])
@@ -166,26 +166,29 @@ def delete_sandwich():
 
     user_sandwiches = sandwich_collection.find({"user_name": session["user_name"]})
     
-    return render_template("profile.html", message = message, user_sandwiches = user_sandwiches)
+    return render_template("profile.html", message = message, user_sandwiches = user_sandwiches,title="Profile", subtitle=session["user_name"], heroimage="coverphoto-bg3.jpg")
 
 
-# ------------------------------------------------------------------------------------------------------------
-# Sandwich Page
-# ------------------------------------------------------------------------------------------------------------
+# ==============================================================================
+# Sandwich Pages and stuff ...   
+# ==============================================================================
 @app.route("/sandwich_form")
 def sandwich_form():
-    return render_template("sandwich_form.html")
+    categories = categories_collection.find()
+    return render_template("sandwich_form.html", categories=categories, title="Add a sandwich", subtitle=session["user_name"], heroimage="coverphoto-bg12.jpg")
 
 
 @app.route("/add_sandwich", methods=['POST'])
 def add_sandwich(): 
-    # 1. Upload image to our folder of sandwich images
-    file = request.files['image']
-    file_name = file.filename
-    data = file.read()
-    file.save('static/img/sandwiches/' + file_name)
-    content_type = file.content_type
-    insertimg = gfs.put(data, content_type=content_type, filename=file_name)
+    # --------------------------------------------------------------------------
+    # Coming in version 2.0 - file upload image to our folder of sandwich images
+    # --------------------------------------------------------------------------
+    # file = request.files['image']
+    # file_name = file.filename
+    # data = file.read()
+    # file.save('static/img/sandwiches/' + file_name)
+    # content_type = file.content_type
+    # insertimg = gfs.put(data, content_type=content_type, filename=file_name)
     
     # 2. Get the form data for the new sandwich  
     sandwich_name = request.form["sandwich_name"]
@@ -194,7 +197,7 @@ def add_sandwich():
     prep_time = request.form["prep_time"]
     ingredients = request.form["ingredients"]
     instructions = request.form["instructions"]
-    image = file.filename
+    image = request.form["image"]
 
     # 3. Save the new sandwich to database
     sandwich_collection.insert({ "sandwich_name":sandwich_name, "description":description, "category":category, "ingredients":ingredients, "instructions":instructions, "image":image, "user_name":session['user_name']})    
@@ -203,7 +206,7 @@ def add_sandwich():
     message = "Sandwich successfully added"
     user_sandwiches = sandwich_collection.find({"user_name": session["user_name"]})
 
-    return render_template("profile.html", message = message, user_sandwiches = user_sandwiches)
+    return render_template("profile.html", message = message, user_sandwiches = user_sandwiches, title="Profile", subtitle=session["user_name"], heroimage="coverphoto-bg3.jpg")
 
 # ------------------------------------------------------------------------------------------------------------
 # Main

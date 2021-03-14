@@ -3,9 +3,6 @@
 
 {% if sandwich %}
 
-<!-- Header -->
-<h1>Edit Sandwich</h1>
-
 <!-- Form to post/add a Sandwich to MongoDB -->
 <form class="card mt3 shadow" method="POST" action="/update_sandwich"">
     <input type="hidden" name="id" value="{{ sandwich._id }}">
@@ -22,10 +19,15 @@
             <label for="category">Category</label>
             <select name="category" class="form-control" required>
                 <option>--Choose a category--</option>
-                <!-- These options should get from my MongoDB categories collection.. TODO next iteration -->
-                <option value="Seafood">Seafood</option>
-                <option value="Vegan">Vegan</option>
-                <option value="Dessert">Dessert</option>
+                {% if categories[0] %}
+                    {% for cat in categories %}
+                    <option value="{{ cat["category_name"] }}"
+                    {% if sandwich.category == cat["category_name"] %}     selected="selected"
+                    {% endif %}
+                    >{{ cat["category_name"] }}</option>
+                    {% endfor %}
+                {% endif %}
+
             </select>
         </div>
         <div class="form-group">
@@ -46,7 +48,7 @@
             <label for="image">Image</label>
             <input type="text" name="image" value="{{ sandwich.image }}" class="form-control" placeholder="Enter name of image, ie. tomato_sandwich.jpg" required>
         </div>
-        <button type="submit" class="btn btn-primary">Update your sandwich!</button>
+        <button type="submit" class="btn btn-success">Update your sandwich!</button>
     </fieldset>
 </form>
 

@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- Header -->
-<h1>Add Sandwich</h1>
-
 <!-- Form to post/add a Sandwich to MongoDB -->
-<form class="card mt3 shadow" method="POST" action="/add_sandwich" enctype="multipart/form-data">
+<form class="card mt3 shadow" method="POST" action="/add_sandwich">
     <fieldset>
         <div class="form-group">
             <label for="sandwich_name">Sandwich Name</label>
@@ -19,10 +16,13 @@
             <label for="category">Category</label>
             <select name="category" class="form-control" required>
                 <option>--Choose a category--</option>
-                <!-- These options should get from my MongoDB categories collection.. TODO next iteration -->
-                <option value="Seafood">Seafood</option>
-                <option value="Vegan">Vegan</option>
-                <option value="Dessert">Dessert</option>
+
+                {% if categories[0] %}
+                    {% for cat in categories %}
+                    <option value="{{ cat["category_name"] }}">{{ cat["category_name"] }}</option>
+                    {% endfor %}
+                {% endif %}
+
             </select>
         </div>
         <div class="form-group">
@@ -40,9 +40,10 @@
         </div>
         <div class="form-group">
             <label for="image">Image</label>
-            <input type="file" name="image" class="form-control" placeholder="Enter name of image, ie. tomato_sandwich.jpg" required>
+            <!-- This will be a fileupload in version 2.0 -->
+            <input type="text" name="image" class="form-control" placeholder="Enter name of image, ie. tomato_sandwich.jpg" required>
         </div>
-        <button type="submit" class="btn btn-primary">Add your sandwich!</button>
+        <button type="submit" class="btn btn-success">Add your sandwich!</button>
     </fieldset>
 </form>
 

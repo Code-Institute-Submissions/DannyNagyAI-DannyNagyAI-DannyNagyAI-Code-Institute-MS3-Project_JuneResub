@@ -1,15 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Profile</h1>
-<hr>
+{% if message %} {{ message }} {% endif %}
 
-{% if message %}
-    {{ message }}
-{% endif %}
-
-{% if 'display_name' in session: %}
-    {{ session['display_name'] }}
-<hr>
 {% if user_sandwiches[0] %}
 <div class="card-group">
 
@@ -32,8 +24,5 @@
     {% else %}
     <h4>Still hungry - no Sandwiches!!!</h4>
     {% endif %}
-   
-
-{% endif %}
 
 {% endblock %}
