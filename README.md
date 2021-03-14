@@ -1,6 +1,6 @@
 #iSandwich
 
-![alt text](DannyNagyAI-Code-Institute-MS3-Project/blob/master/static/img/coverphoto-bg1.jpg "Header of the Homepage")
+![alt text](https://github.com/DannyNagyAI/-Code-Institute-MS3-Project/blob/master/static/img/coverphoto-bg1.jpg "Header of the Homepage")
 
 > **(iSandwich)**
 
