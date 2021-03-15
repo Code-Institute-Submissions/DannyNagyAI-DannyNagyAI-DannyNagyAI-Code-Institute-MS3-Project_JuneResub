@@ -94,6 +94,7 @@ This project development has been done by using Gitpod, CI Gitpod Full Template 
 
 Be sure that you have got Python, PIP and Git installed. If not do that before using/cloning this project.
 
+
 ### How to deploy this file on Heroku:
 
 1. First navigate to Gitpod worskapce. 
@@ -120,7 +121,7 @@ git push
 
 git push heroku master
 
-9. Go back to your app in Heroku in your browser, select the 'Settings'-tab, click on "Reveal Config Vars" and set the following config vars:
+9. Go back to your app in Heroku in your browser, select the 'Settings'-tab, click on "Reveal Config Vars" and set following config vars:
 
 IP:  and 0.0.0.0
 PORT: and 5000
@@ -130,34 +131,7 @@ MONGO_URI: and <link to your MongoDB database> (must be the same as in your file
 
 Connect Heroku to deploy from the master branch of DannyNagyAI-DannyNagyAI-Code-Institute-MS3-Project repository.
 
-Successfully deploy the application.
-
-
-## Deploying this site on heroku
-
-
-1. Go to your browser and type Heroku.com and login.
-2. Click to dashboard and click on the new app button.
-
-3. Then select create new Heroku app.
-
-4. Enter a new and unique app name (Heroku will let you know if the app name is available or not).
-
-5. Select your region.
-
-6. Set up the connection to the Github Repository:
-
-7. First click the deploy button and then select GitHub - Connect to GitHub. 
-
-8. A prompt to find a github repository to connect to will then be displayed. Enter the repository name for the project and click search. Once the repo has been found, click the connect button. Set environment variables:
-
-Click the settings tab and then click the Reveal Confid Vars button and add the following:
-key: IP, value: 0.0.0.0
-key: PORT, value: 5000
-key: MONGO_DBNAME, value: (your database name)
-key: MONGO_URI, value: (mongo uri - This can be found on your mongoDB account)
-
-9. In the Automatic deploys section, choose the branch you want to deploy from then click Enable Automation Deploys.
+Done!
 
 ## Credits
 
