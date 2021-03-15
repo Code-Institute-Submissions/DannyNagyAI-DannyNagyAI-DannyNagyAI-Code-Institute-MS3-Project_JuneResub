@@ -44,6 +44,7 @@ Here the user can add and build their own recipe of a sandwich that they would l
 
 ## Technologies used in the project 
 
+Figma,
 HTML5, 
 CSS, 
 Bootstrap, 
