@@ -3,11 +3,9 @@ import pymongo
 if os.path.exists("env.py"):
     import env
 
-
     MONGO_URI = os.environ.get("MONGO_URI")
     DATABASE = "iSandwichDB"
     COLLECTION = "sandwiches"
-
 
     def mongo_connect(url):
         try:
@@ -22,7 +20,11 @@ conn = mongo_connect(MONGO_URI)
 
 coll = conn[DATABASE][COLLECTION]
 
-new_doc = {"name": "BBQ Sandwich", "ingridients": "Bread, butter, bbq sauce from Kentucky, cheese", "instructions": "Just make it juicy and delicious"}
+new_doc = {
+    "name": "BBQ Sandwich",
+    "ingridients": "Bread, butter, bbq sauce from Kentucky, cheese",
+    "instructions": "Just make it juicy and delicious"
+}
 
 coll.insert(new_doc)
 
